@@ -1,4 +1,4 @@
-from numpy import *
+#This code did not use any library package, e.g. numpy or scipy, instead it uses basic numerical formula to get linear regression
 
 def compute_error_for_line_given_points(b,m,points):
 	#initialize at 0
