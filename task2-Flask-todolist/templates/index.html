@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--The <!DOCTYPE> declaration is not an HTML tag; it is an instruction to the web browser about what version of HTML the page is written in-->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Todo App</title>
+</head>
+<!--Body---------Session------------------>
+<body>
+	<h1>To Do List</h1>
+
+	<!-----------Division1: ADD NEW TO DO ITEM-------------------------->
+	<div> <!--'defines a division or a section in an HTML document.Text within this section has the same style-->
+		Add a new to do ITEM: 
+		<form action="{{ url_for('add') }}" method="POST"> <!--note: 'add' refers to @app.route('/add') from app.py-->
+			<input type='text' name="todoitem"> <!--Note: create an input box-->
+			<input type='submit' value='add items'> <!--Note: create a button to submit result-->
+		</form>
+		<!--Note: FORM elements defines a form that is used to collect user input, form elements are different types of input elements, like text fields, checkboxes, radio buttons, and more.-->	
+<!--NOTE: To make the submitted input to appear on the list, we need to add those inputs to the database-> to create DB, use Python-->
+	</div>
+
+	<div>
+		<!-----------Division2 part I: incomplete items-------------->
+		<h2>Incomplete Items</h2>
+		<ul> <!--NOTE:ul=unordered list, li=list, it is with bullet point-->
+			{% for each in incomplete %}
+			<li style="font-size: 30pt">{{ each.text }} <a href="{{ url_for('complete', ids=each.id) }}">Mark As Complete</a></li> 
+			{% endfor %}
+		</ul>
+		<!-----------Division2 Part II: Completed items-------------->
+		<h2>Completed Items</h2>
+		<ul>
+			{% for each in completeditems %}
+			<li style="font-size: 30pt">{{ each.text }}</li> 
+			{% endfor %}
+	</div>
+</body>
+</html>

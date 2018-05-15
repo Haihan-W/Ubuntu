@@ -1,0 +1,19 @@
+1.IMPORT MODULE:
+  Given: 
+	Folder structure: 
+		task2_todolist/
+		  app.py
+		  DB/
+		    database.py
+		    todo.db
+				
+	  Global folder of this project: task2_todolist
+	  Child folder: DB
+
+   Want: import flask_sqlalchemy (python extension) to initiate one of its module called 'db' and use its built-in functions (e.g. create table,..) and apply to database file: todo.db
+    
+   CODE of Practice: 
+	1.1. If module is for specific use in child folder, always initiate it in child folder not in global folder. (e.g. Here db module is for database use only--> initiate module db in python script(database.py) under CHILD folder(/DB) NOT in python script(app.py) under global folder(/task2_todolist)) ---------REASON:If you initiate every module in global folder, module name may have conflict. So the best way to avoid this situation is to initiate each module in subfolder, then if want, just import it to global folder from subfolder.(see 1.2)
+ 	1.2 After initiating module db in CHILD folder, if we want to import and use it in global folder, just open app.py and type "from DB.database import db" (NOTE: syntax here: 1. uses . instead of / ; 2. NOT use file type .db when import from file, i.e. NOT use from DB.database.py import ...)
+---------------------------------------------
+ 
