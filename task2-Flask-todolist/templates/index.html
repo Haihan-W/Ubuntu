@@ -25,14 +25,14 @@
 		<h2>Incomplete Items</h2>
 		<ul> <!--NOTE:ul=unordered list, li=list, it is with bullet point-->
 			{% for each in incomplete %}
-			<li style="font-size: 30pt">{{ each.text }} <a href="{{ url_for('complete', ids=each.id) }}">Mark As Complete</a></li> 
+			<li style="font-size: 30pt">{{ each.text }} <a href="{{ url_for('complete', ids=each.id) }}">Mark As Complete</a></li> <!--each.id, id is an attribute from defined class Todo in app.py-->  
 			{% endfor %}
 		</ul>
 		<!-----------Division2 Part II: Completed items-------------->
 		<h2>Completed Items</h2>
 		<ul>
 			{% for each in completeditems %}
-			<li style="font-size: 30pt">{{ each.text }}</li> 
+			<li style="font-size: 30pt">{{ each.text }} <a href="{{ url_for('delete', ids=each.id) }}">Delete from BE DB</a></li> <!--Similar as 'Mark As Complete' above-->   
 			{% endfor %}
 	</div>
 </body>

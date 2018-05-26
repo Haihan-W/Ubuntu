@@ -23,19 +23,28 @@ def index():
 @app.route('/add',methods=['POST']) #By this, I created another route to lead to a different page-- a subroute'/add' #Note: 'post' method is only used for submitting a form with a submit button 
 def add():
     #add new submitted items to db
-    todo=Todo(text=request.form['todoitem'],complete=False) #submittd item 'text' is from whatever you typed and submitted in the webpage. #Here initiated an instance of the Todo class
+    todo=Todo(text=request.form['todoitem'],complete=False) #submittd item 'text' is from whatever you typed and submitted in the webpage. #text,complete, are attributes defined in class Todo #'todoitem' comes from index.html-- creating input box session #Here initiated an instance of the Todo class
     db.session.add(todo)
     db.session.commit()
-
+	
     return redirect(url_for('index')) #After added item to DB, redirect FE subroute '/add' to FE URL from index(), note: index() is under @app.route('/')
 
-@app.route('/complete/<ids>') #variable 'ids' is created!!!!!!This 'ids' will be referred by hyperlink href in index.html, from there, todo.id will be passed to ids and passed here and passed to the complete function below.
+@app.route('/complete/<ids>') #variable 'ids' is created!!!!!!This 'ids' will be referred by hyperlink href in index.html, from there, todo.id will be passed to ids and passed here and passed to the complete() function below.
 def complete(ids): #purpose: to update the BE DB, mark completed items as complete. When you click the hyperlink 'mark as complete', it will go to this route and finish this complete function and change attribute 'complete' of this clicked item as completed
 	todo=Todo.query.filter_by(id=int(ids)).first() #first means: because everytime you will only click on hyperlink for one item, so only one item will be passed. I will assume there is no duplicated items with the same id, even if there is, I use first to choose only the first appeared one. 
 	todo.complete=True
 	db.session.commit()
 
 	return redirect(url_for('index'))
+
+@app.route('/delete/<ids>')  
+def delete(ids):
+    #delete selected items in FE by hyperlink, similar as complete() func
+	todo=Todo.query.filter_by(id=int(ids)).first()
+	db.session.delete(todo)
+	db.session.commit()
+	
+	return redirect(url_for('index')) 
 
 if __name__=='__main__':
     app.run(debug=True)
