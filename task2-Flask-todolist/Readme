@@ -1,0 +1,9 @@
+Functions of To-do list:
+1. Add items via front-end user-interface (webpage) and add data in backend database.
+2. Label item ('mark as complete') items via FE and update data in BE database.
+3. Remove item via FE and delete data in BE database.
+
+Language: Python, HTML
+Framework: Flask
+Relational DB management system: SQLite
+Environment: Linux(Ubuntu)
